@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="team8App">
+    <head>
+        <title>Customers</title>
+        <link rel="stylesheet" href="css/team8.css" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <script src="lib/angular/angular-1.2.14.js"></script>
+        <script src="js/controllers/customerController.js"></script>
+    </head>
+    <body ng-controller="CustomerController">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span2">
+                    <!-- Search sidebar -->
+                    <label>Search:<input ng-model="query"></label>
+                    <label>
+                        Order by:
+                        <select ng-model="sortField">
+                            <option value="address">Address</option>
+                            <option value="company">Company</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="span10">
+                    <p>Total number of customers: {{ customers.length }}</p>
+                    <div>
+                        <input type="button" value="New..." disabled />
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Address</th>
+                        </tr>
+                        <tr ng-repeat="customer in customers | filter:query | orderBy:sortField">
+                            <td>{{ customer.firstName + " " + customer.lastName }}</td>
+                            <td>{{ customer.company }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td><input type="button" value="Edit" disabled /></td>
+                            <td><input type="button" value="Delete" disabled /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
